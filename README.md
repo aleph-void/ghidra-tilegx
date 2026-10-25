@@ -1,11 +1,16 @@
 # TILE-Gx processor
 
-This module provides little-endian TILE-Gx ELF loading, bundle disassembly, and
-p-code for Ghidra.
+This module loads TILE-Gx ELF files and disassembles the processor's 64-bit bundles.
 
-- Language ID: `TILE:LE:64:default`
-- ELF machine: `EM_TILEGX` (`191`)
-- Calling convention: GCC TILE-Gx ABI
+| Language | Data byte order | ABI |
+|---|---|---|
+| `TILE:LE:64:default` | little | 64-bit pointers and `long` |
+| `TILE:BE:64:default` | big | 64-bit pointers and `long` |
+| `TILE:LE:32:default` | little | 32-bit pointers and `long` |
+| `TILE:BE:32:default` | big | 32-bit pointers and `long` |
+
+Instruction bundles retain their little-endian byte layout in all four languages. The ELF
+machine number is 191 (`EM_TILEGX`).
 
 Each 64-bit bundle decodes as either two X-pipeline operations or three
 Y-pipeline operations. P-code reads all source registers before committing any
@@ -14,18 +19,11 @@ Scalar, memory, control-flow, atomic, multiplication, CRC, and selected SIMD
 operations have native p-code. Instructions whose hardware behavior is not yet
 modeled use mnemonic-specific user-ops.
 
-## Opcode source
+The language specifications are generated from instruction fields in Tilera's ISA manual
+(UG401) by `support/generate_tilegx_sleigh.py`. `GHIDRA-RARE.md` gives the decode, emulator,
+and real-binary results and remaining limits. `CREDITS.md` records the original Ghidra pull
+request and the changes made here.
 
-`data/languages/TILE_le.slaspec` is generated from the opcode masks in GNU
-binutils 2.35.1 `opcodes/tilegx-opc.c`. The generated SLEIGH file is committed
-and is the module's build input. Regeneration is optional:
-
-```bash
-cc <binutils include and library flags> support/dump_tilegx_opcodes.c \
-    <binutils libraries> -o dump_tilegx_opcodes
-python3 support/generate_tilegx_sleigh.py \
-    ./dump_tilegx_opcodes data/languages/TILE_le.slaspec
-```
-
-The generator contains decoder and semantic self-checks. The processor test
-also emulates a cross-slot dependency to verify parallel bundle semantics.
+Build with Ghidra's `buildExtension` after compiling all four `.slaspec` files, or use
+Ghidra-Rare's `tools/build-module.sh --standard --name TILE`. The `test/` directory holds the
+slot comparator, emulator checks, constructor coverage check, and real-binary inspection script.
