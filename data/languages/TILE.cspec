@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <compiler_spec>
   <data_organization>
+    <char_type signed="true"/>
     <absolute_max_alignment value="0"/>
     <machine_alignment value="8"/>
     <default_alignment value="1"/>

@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- TILE-Gx. Bundles are always little-endian; "endian" is the data byte order of the process
+     (gcc -mbig-endian). The 32-bit languages are the -m32 ABI (ELFCLASS32): 64-bit registers,
+     32-bit pointers. -->
 <language_definitions>
   <language processor="TILE"
             endian="little"
             size="64"
             variant="default"
-            version="1.0"
+            version="1.1"
             slafile="TILE_le.sla"
             processorspec="TILE.pspec"
+            manualindexfile="../manuals/TILE.idx"
             id="TILE:LE:64:default">
     <description>TILE-Gx 64-bit little-endian</description>
     <compiler name="gcc" spec="TILE.cspec" id="gcc"/>
-    <external_name tool="gnu" name="tilegx:tilegx"/>
+    <external_name tool="gnu" name="tilegx"/>
     <external_name tool="IDA-PRO" name="tilegxl"/>
+    <external_name tool="DWARF.register.mapping.file" name="TILE.dwarf"/>
+  </language>
+  <language processor="TILE"
+            endian="big"
+            size="64"
+            variant="default"
+            version="1.1"
+            slafile="TILE_be.sla"
+            processorspec="TILE.pspec"
+            manualindexfile="../manuals/TILE.idx"
+            id="TILE:BE:64:default">
+    <description>TILE-Gx 64-bit big-endian</description>
+    <compiler name="gcc" spec="TILE.cspec" id="gcc"/>
+    <external_name tool="gnu" name="tilegx"/>
+    <external_name tool="DWARF.register.mapping.file" name="TILE.dwarf"/>
+  </language>
+  <language processor="TILE"
+            endian="little"
+            size="32"
+            variant="default"
+            version="1.1"
+            slafile="TILE_le32.sla"
+            processorspec="TILE.pspec"
+            manualindexfile="../manuals/TILE.idx"
+            id="TILE:LE:32:default">
+    <description>TILE-Gx -m32 ABI (32-bit pointers) little-endian</description>
+    <compiler name="gcc" spec="TILE32.cspec" id="gcc"/>
+    <external_name tool="gnu" name="tilegx"/>
+    <external_name tool="DWARF.register.mapping.file" name="TILE.dwarf"/>
+  </language>
+  <language processor="TILE"
+            endian="big"
+            size="32"
+            variant="default"
+            version="1.1"
+            slafile="TILE_be32.sla"
+            processorspec="TILE.pspec"
+            manualindexfile="../manuals/TILE.idx"
+            id="TILE:BE:32:default">
+    <description>TILE-Gx -m32 ABI (32-bit pointers) big-endian</description>
+    <compiler name="gcc" spec="TILE32.cspec" id="gcc"/>
+    <external_name tool="gnu" name="tilegx"/>
+    <external_name tool="DWARF.register.mapping.file" name="TILE.dwarf"/>
   </language>
 </language_definitions>

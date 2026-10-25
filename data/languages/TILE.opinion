@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EM_TILEGX (191). The ELF loader picks the language whose endian and size match the ELF
+     header's data encoding and class (ELFCLASS32 is the -m32 ABI). -->
 <opinions>
   <constraint loader="Executable and Linking Format (ELF)" compilerSpecID="gcc">
     <constraint primary="191" processor="TILE" endian="little" size="64" variant="default"/>
+    <constraint primary="191" processor="TILE" endian="big" size="64" variant="default"/>
+    <constraint primary="191" processor="TILE" endian="little" size="32" variant="default"/>
+    <constraint primary="191" processor="TILE" endian="big" size="32" variant="default"/>
   </constraint>
 </opinions>

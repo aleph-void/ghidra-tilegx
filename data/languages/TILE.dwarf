@@ -1,0 +1,18 @@
+<dwarf>
+	<!-- GCC numbers the TILE-Gx registers as the hardware does: 0-63 (Tilera UG513 table 2.2) -->
+	<register_mappings>
+		<register_mapping dwarf="0" ghidra="r0" auto_count="53"/> <!-- r0..r52 -->
+		<register_mapping dwarf="53" ghidra="tp"/>
+		<register_mapping dwarf="54" ghidra="sp" stackpointer="true"/>
+		<register_mapping dwarf="55" ghidra="lr"/>
+		<register_mapping dwarf="56" ghidra="sn"/>
+		<register_mapping dwarf="57" ghidra="idn0"/>
+		<register_mapping dwarf="58" ghidra="idn1"/>
+		<register_mapping dwarf="59" ghidra="udn0"/>
+		<register_mapping dwarf="60" ghidra="udn1"/>
+		<register_mapping dwarf="61" ghidra="udn2"/>
+		<register_mapping dwarf="62" ghidra="udn3"/>
+		<register_mapping dwarf="63" ghidra="zero"/>
+	</register_mappings>
+	<call_frame_cfa value="0"/>
+</dwarf>
